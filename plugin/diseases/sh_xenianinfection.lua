@@ -1,11 +1,10 @@
-local DISEASE = Clockwork.disease:New("Cold");
-DISEASE.description = "A regular cold, generally not dangerous at all.";
+local DISEASE = Clockwork.disease:New("Xenian Infection");
+DISEASE.description = "An infection from xenian origin, potentially dangerous..";
 DISEASE.incubationTime = 5;
 DISEASE.infectuous = true;
 DISEASE.immuneFactions = {"Overwatch Transhuman Arm"};
-DISEASE.transmissionType = "hybrid";
-DISEASE.severity = 40;
-DISEASE.lethality = 0;
+DISEASE.severity = 80;
+DISEASE.lethality = 20;
 
 function DISEASE:OnTemporaryEffect(player)
 	player:EmitSound("ambient/voices/cough"..math.random(1, 4)..".wav");

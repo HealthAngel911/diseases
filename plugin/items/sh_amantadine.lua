@@ -19,6 +19,9 @@ function ITEM:OnUse(player, itemEntity)
 	if player:GetCharacterData("diseases") == "flu" then
 		player:SetCharacterData( "diseases", "none" );
 	end
+	if player:GetCharacterData("diseases") == "cold" then
+		player:SetCharacterData( "diseases", "none" );
+	end
 end;
 
 if (SERVER) then
@@ -28,9 +31,15 @@ if (SERVER) then
 			if lookingPly:IsPlayer() then
 				if lookingPly:GetCharacterData("diseases") == "stomachflu" then
 					lookingPly:SetCharacterData( "diseases", "none" );
-				elseif lookingPly:GetCharacterData("diseases") == "flu" then
+					Clockwork.player:Notify(player, "You gave some Amantadine to the person.");
+					player:TakeItem(player:FindItemByID("amantadine"));
+				end
+				if lookingPly:GetCharacterData("diseases") == "flu" then
 					lookingPly:SetCharacterData( "diseases", "none" );
-				elseif lookingPly:GetCharacterData("diseases") == "cold" then
+					Clockwork.player:Notify(player, "You gave some Amantadine to the person.");
+					player:TakeItem(player:FindItemByID("amantadine"));
+				end
+				if lookingPly:GetCharacterData("diseases") == "cold" then
 					lookingPly:SetCharacterData( "diseases", "none" );
 					Clockwork.player:Notify(player, "You gave some Amantadine to the person.");
 					player:TakeItem(player:FindItemByID("amantadine"));

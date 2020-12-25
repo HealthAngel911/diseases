@@ -5,10 +5,10 @@
 */
 
 local CONFIG_coughChance = 200 -- Set the chance of getting a cough each 5-10 minutes. Default is 200, which means 1/200.
-local CONFIG_feverChance = 600 -- Set the chance of getting a fever each 5-10 minutes. Default is 600, which means 1/600.
+local CONFIG_fluChance = 600 -- Set the chance of getting a flu each 5-10 minutes. Default is 600, which means 1/600.
 
 local CONFIG_coughPerform = math.random(15,45) -- This functoin finds a random value between your two values for when it'll display the next /me of the player who coughs. Default is (15,45). Number is in seconds.
-local CONFIG_feverPerform = math.random(120,300) -- This functoin finds a random value between your two values for when it'll display the next /me of the player who has fever. Default is (120,300). Number is in seconds.
+local CONFIG_fluPerform = math.random(120,300) -- This functoin finds a random value between your two values for when it'll display the next /me of the player who has flu. Default is (120,300). Number is in seconds.
 
 /*
 ===================================================
@@ -52,11 +52,11 @@ function PLUGIN:PlayerThink(player, curTime, infoTable)
 						player.nextCough = CurTime() + CONFIG_coughPerform;
 					end
 				end;
-			elseif player:GetSharedVar("diseases") == "fever" then
-				if !player.nextFever or CurTime() > player.nextFever then
+			elseif player:GetSharedVar("diseases") == "flu" then
+				if !player.nextFlu or CurTime() > player.nextFlu then
 					if !player:IsNoClipping() then
 						Clockwork.chatBox:AddInTargetRadius(player, "me", string.gsub("feels very dizzy and hot.", "^.", string.lower), player:GetPos(), Clockwork.config:Get("talk_radius"):Get());
-						player.nextFever = CurTime() + CONFIG_feverPerform;
+						player.nextFlu = CurTime() + CONFIG_fluPerform;
 					end
 				end;
 			else -- Give people randomly disease.
@@ -66,8 +66,8 @@ function PLUGIN:PlayerThink(player, curTime, infoTable)
 						if math.random(1,CONFIG_coughChance) == 2 then
 							player:SetCharacterData("diseases", "cough");
 						end
-						if math.random(1,CONFIG_feverChance) == 2 then
-							player:SetCharacterData("diseases", "fever");
+						if math.random(1,CONFIG_fluChance) == 2 then
+							player:SetCharacterData("diseases", "flu");
 						end
 					end
 					nextTrigger = CurTime() + math.random(300,600);

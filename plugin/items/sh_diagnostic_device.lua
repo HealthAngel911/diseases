@@ -57,7 +57,7 @@ if (SERVER) then
 			end
 			return false;
 		else
-			Clockwork.player:Notify(player, "You must target a person!");
+			Clockwork.player:Notify(player, "You must look at a person!");
 			return false;
 		end;
 	end;
