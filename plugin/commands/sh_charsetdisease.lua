@@ -1,5 +1,5 @@
 COMMAND = Clockwork.command:New("CharSetDisease");
-COMMAND.tip = "Set a player's disease.";
+COMMAND.tip = "Set a players disease.";
 COMMAND.text = "<string Name> <String Disease>";
 COMMAND.flags = CMD_DEFAULT;
 COMMAND.access = "a";

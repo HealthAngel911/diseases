@@ -4,11 +4,11 @@
 ===================================================
 */
 
-local CONFIG_coughChance = 200 -- Set the chance of getting a cough each 5-10 minutes. Default is 200, which means 1/200.
-local CONFIG_fluChance = 600 -- Set the chance of getting a flu each 5-10 minutes. Default is 600, which means 1/600.
+local CONFIG_coughChance = 200 // Set the chance of getting a cough each 5-10 minutes. Default is 200, which means 1/200.
+local CONFIG_fluChance = 600 // Set the chance of getting a flu each 5-10 minutes. Default is 600, which means 1/600.
 
-local CONFIG_coughPerform = math.random(15,45) -- This functoin finds a random value between your two values for when it'll display the next /me of the player who coughs. Default is (15,45). Number is in seconds.
-local CONFIG_fluPerform = math.random(120,300) -- This functoin finds a random value between your two values for when it'll display the next /me of the player who has flu. Default is (120,300). Number is in seconds.
+local CONFIG_coughPerform = math.random(15,45) // This functoin finds a random value between your two values for when it'll display the next /me of the player who coughs. Default is (15,45). Number is in seconds.
+local CONFIG_fluPerform = math.random(120,300) // This functoin finds a random value between your two values for when it'll display the next /me of the player who has flu. Default is (120,300). Number is in seconds.
 
 /*
 ===================================================
@@ -75,5 +75,33 @@ function PLUGIN:PlayerThink(player, curTime, infoTable)
 				
 			end;
 		end;
+		
+		-- This should effect all type of players.
+		/*if player:GetSharedVar("diseases") == "slow_deathinjection" or player:GetSharedVar("diseases") == "fast_deathinjection" then
+			if !player.nextInject or CurTime() > player.nextInject then
+				if !player:IsNoClipping() then
+					if player:GetGender() == GENDER_FEMALE then
+						player:EmitSound("vo/npc/female01/pain0"..math.random(1, 9)..".wav", 30, 100 );
+					else
+						player:EmitSound("vo/npc/male01/pain0"..math.random(1, 9)..".wav", 30, 100 );
+					end;
+					
+					if player:Health() >= 5 then
+						player:SetHealth(player:Health() - 1)
+					else
+						Schema:PermaKillPlayer(player, player:GetRagdollEntity());
+						Clockwork.player:Notify(player, "You're now PermaKilled caused by your toxins injected to your body...");
+					end
+					
+					if player:GetSharedVar("diseases") == "fast_deathinjection" then
+						player.nextInject = CurTime() + 0.5;
+					else
+						player.nextInject = CurTime() + math.random(4,6);
+					end;
+				end
+			end;
+		end;*/
+		
+		
 	end;
 end;
